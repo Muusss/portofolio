@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm list *)",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\('git'\\) || k.toLowerCase\\(\\).includes\\('link'\\) || k.toLowerCase\\(\\).includes\\('social'\\)\\).slice\\(0, 30\\)\\)\")",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.includes\\('Hub'\\) || k.includes\\('Linked'\\) || k.includes\\('Code'\\)\\).slice\\(0, 20\\)\\)\")",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).startsWith\\('brand'\\)\\).slice\\(0, 50\\)\\)\")",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\('mail'\\) || k.toLowerCase\\(\\).includes\\('heart'\\) || k.toLowerCase\\(\\).includes\\('award'\\)\\).slice\\(0, 30\\)\\)\")",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\('github'\\) || k.toLowerCase\\(\\).includes\\('linkedin'\\)\\).slice\\(0, 20\\)\\)\")",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\('social'\\) || k.toLowerCase\\(\\).includes\\('share'\\)\\).slice\\(0, 30\\)\\)\")",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3000)"
+    ]
+  }
+}

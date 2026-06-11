@@ -253,43 +253,6 @@ export default function ContactPage() {
                 </a>
               </div>
             </div>
-
-            {/* FAQ */}
-            <div>
-              <h3 className="text-white font-semibold mb-4">{t.contact.faqTitle}</h3>
-              <div className="space-y-3">
-                {faqs.map((faq, index) => (
-                  <div
-                    key={index}
-                    className="rounded-xl glass overflow-hidden"
-                  >
-                    <button
-                      onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                      className="w-full flex items-center justify-between p-4 text-left"
-                    >
-                      <span className="text-white font-medium">{faq.question}</span>
-                      <span
-                        className={`text-muted-foreground transition-transform ${
-                          expandedFaq === index ? "rotate-180" : ""
-                        }`}
-                      >
-                        ▼
-                      </span>
-                    </button>
-                    {expandedFaq === index && (
-                      <motion.div
-                        initial={{ height: 0 }}
-                        animate={{ height: "auto" }}
-                        exit={{ height: 0 }}
-                        className="px-4 pb-4"
-                      >
-                        <p className="text-muted-foreground text-sm">{faq.answer}</p>
-                      </motion.div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>

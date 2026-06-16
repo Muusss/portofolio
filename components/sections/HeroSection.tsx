@@ -1,98 +1,95 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Download } from "lucide-react";
 import { useLanguage } from "@/i18n";
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
-};
+import { ArrowRight } from "lucide-react";
 
 export function HeroSection() {
   const { t } = useLanguage();
+  const [isVisible, setIsVisible] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 animate-gradient" />
+      {/* Dynamic gradient background for dark mode */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)] via-[#0D0D14] to-[var(--background)]" />
 
-      {/* Floating orbs */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary/20 blur-[100px] animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-secondary/20 blur-[120px] animate-float" style={{ animationDelay: "2s" }} />
-      <div className="absolute top-1/2 right-1/3 w-48 h-48 rounded-full bg-accent/20 blur-[80px] animate-float" style={{ animationDelay: "4s" }} />
+      {/* Ambient glow effects */}
+      <div className="absolute top-1/4 -right-32 w-[500px] h-[500px] bg-[var(--accent)]/10 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 -left-32 w-[500px] h-[500px] bg-[var(--primary)]/10 rounded-full blur-[120px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--accent)]/5 rounded-full blur-[150px]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="text-center space-y-8"
-        >
-          {/* Badge */}
-          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass">
-            <span className="text-sm text-muted-foreground">{t.hero.badge}</span>
-          </motion.div>
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+      }} />
 
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-32">
+        <div className={`space-y-8 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           {/* Main heading */}
-          <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl font-bold">
-            <span className="text-white">{t.hero.greeting} </span>
-            <span className="gradient-text">{t.hero.name}</span>
-          </motion.h1>
+          <div className="space-y-4">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight">
+              <span className="text-[var(--foreground)]">{t.hero.greeting}</span>
+              <br />
+              <span className="gradient-text">{t.hero.name}</span>
+            </h1>
+          </div>
 
           {/* Subtitle */}
-          <motion.p variants={itemVariants} className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-[var(--muted-foreground)] max-w-2xl leading-relaxed">
             {t.hero.description}
-          </motion.p>
+          </p>
 
           {/* CTA Buttons */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row items-start gap-4 pt-4">
             <Link
               href="/projects"
-              className="group flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary via-secondary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
+              className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[var(--accent)] to-yellow-500 text-[var(--accent-foreground)] font-semibold shadow-lg shadow-[var(--accent)]/20 hover:shadow-xl hover:shadow-[var(--accent)]/30 hover:-translate-y-0.5 transition-all duration-300"
             >
               {t.hero.viewWork}
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
               href="/contact"
-              className="flex items-center gap-2 px-8 py-4 rounded-full glass text-white font-semibold hover:bg-white/10 transition-all duration-300"
+              className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[var(--card)] text-[var(--foreground)] font-semibold border border-[var(--border)] hover:border-[var(--accent)]/50 hover:shadow-lg hover:shadow-[var(--accent)]/10 hover:-translate-y-0.5 transition-all duration-300"
             >
-              <Download size={18} />
+              <ArrowRight size={18} />
               {t.hero.contactMe}
             </Link>
-          </motion.div>
+          </div>
+        </div>
 
-          {/* Scroll indicator */}
-          <motion.div variants={itemVariants} className="pt-16">
-            <div className="flex flex-col items-center gap-2 text-muted-foreground">
-              <span className="text-sm">{t.hero.scrollHint}</span>
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                className="w-6 h-10 rounded-full border-2 border-muted-foreground flex justify-center pt-2"
-              >
-                <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground" />
-              </motion.div>
+        {/* Profile Photo */}
+        <div className={`mt-12 flex justify-center transition-all duration-700 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+          <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[var(--accent)] to-yellow-400 animate-pulse" style={{ animationDuration: '3s' }} />
+            <div className="absolute inset-2 rounded-full overflow-hidden bg-[var(--background)]">
+              {!imageError ? (
+                <Image
+                  src="/profile.jpeg"
+                  alt="Foto Profil Musa"
+                  fill
+                  sizes="(max-width: 768px) 192px, 256px"
+                  className="object-cover"
+                  onError={() => setImageError(true)}
+                  priority
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--accent)] to-yellow-400">
+                  <span className="text-5xl sm:text-6xl font-bold text-[var(--accent-foreground)]">M</span>
+                </div>
+              )}
             </div>
-          </motion.div>
-        </motion.div>
+            {/* Decorative ring */}
+            <div className="absolute -inset-4 rounded-full border-2 border-dashed border-[var(--accent)]/30 animate-spin-slow" style={{ animationDuration: '20s' }} />
+          </div>
+        </div>
       </div>
     </section>
   );

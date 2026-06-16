@@ -6,23 +6,23 @@ export function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
 
   return (
-    <div className="flex items-center gap-1 p-1 rounded-lg glass">
+    <div className="flex items-center bg-[var(--muted)] rounded-lg p-0.5">
       <button
         onClick={() => setLanguage("id")}
-        className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
+        className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all duration-200 ${
           language === "id"
-            ? "bg-gradient-to-r from-primary to-secondary text-white shadow-md"
-            : "text-muted-foreground hover:text-white hover:bg-card/50"
+            ? "bg-[var(--card)] text-[var(--foreground)] shadow-sm"
+            : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
         }`}
       >
         ID
       </button>
       <button
         onClick={() => setLanguage("en")}
-        className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
+        className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all duration-200 ${
           language === "en"
-            ? "bg-gradient-to-r from-primary to-secondary text-white shadow-md"
-            : "text-muted-foreground hover:text-white hover:bg-card/50"
+            ? "bg-[var(--card)] text-[var(--foreground)] shadow-sm"
+            : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
         }`}
       >
         EN

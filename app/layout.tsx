@@ -1,19 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
-import { CustomCursor } from "@/components/effects/CustomCursor";
-import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { LanguageProvider } from "@/i18n";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
-const inter = Inter({
-  variable: "--font-inter",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -29,14 +24,22 @@ export default function RootLayout({
   return (
     <html lang="id" className="dark">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} min-h-screen flex flex-col antialiased`}
+        className={`${plusJakarta.variable}`}
       >
-        <LanguageProvider>
-          <CustomCursor />
-          <ScrollProgress />
-          <Navbar />
-          <main className="flex-1">{children}</main>
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            {/* Skip to main content link for keyboard users */}
+            <a
+              href="#main-content"
+              className="sr-only focus:not:sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:font-bold"
+            >
+              Skip to main content
+            </a>
+
+            <Navbar />
+            <main id="main-content">{children}</main>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

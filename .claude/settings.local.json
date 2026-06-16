@@ -9,7 +9,8 @@
       "Bash(node -e \"const l = require\\('lucide-react'\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\('github'\\) || k.toLowerCase\\(\\).includes\\('linkedin'\\)\\).slice\\(0, 20\\)\\)\")",
       "Bash(node -e \"const l = require\\('lucide-react'\\); console.log\\(Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\('social'\\) || k.toLowerCase\\(\\).includes\\('share'\\)\\).slice\\(0, 30\\)\\)\")",
       "Bash(npm run *)",
-      "Bash(curl -s http://localhost:3000)"
+      "Bash(curl -s http://localhost:3000)",
+      "mcp__ide__getDiagnostics"
     ]
   }
 }

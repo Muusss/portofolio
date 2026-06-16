@@ -1,66 +1,61 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { useLanguage } from "@/i18n";
 import { Code, Database, Cloud, Wrench } from "lucide-react";
+import { SkillLogoComponent } from "@/components/ui/Logos";
 
 const techCategories = [
   {
     id: "development",
     title: "Development",
     icon: Code,
-    color: "from-blue-500 to-cyan-500",
     items: [
-      { name: "HTML", abbr: "HT" },
-      { name: "CSS", abbr: "CS" },
-      { name: "JavaScript", abbr: "JS" },
-      { name: "PHP", abbr: "PH" },
-      { name: "Python", abbr: "PY" },
-      { name: "React", abbr: "RC" },
-      { name: "Next.js", abbr: "NX" },
-      { name: "TypeScript", abbr: "TS" },
-      { name: "MySQL", abbr: "MY" },
+      { name: "HTML", logo: "HTML" },
+      { name: "CSS", logo: "CSS" },
+      { name: "JavaScript", logo: "JavaScript" },
+      { name: "PHP", logo: "PHP" },
+      { name: "Python", logo: "Python" },
+      { name: "React", logo: "React" },
+      { name: "Next.js", logo: "NextJS" },
+      { name: "TypeScript", logo: "TypeScript" },
+      { name: "MySQL", logo: "MySQL" },
     ],
   },
   {
     id: "tools",
     title: "Tools & Design",
     icon: Wrench,
-    color: "from-orange-500 to-amber-500",
     items: [
-      { name: "Git", abbr: "GT" },
-      { name: "VS Code", abbr: "VC" },
-      { name: "Figma", abbr: "FG" },
-      { name: "Tailwind CSS", abbr: "TW" },
-      { name: "Photoshop", abbr: "PS" },
-      { name: "Illustrator", abbr: "AI" },
+      { name: "Git", logo: "Git" },
+      { name: "VS Code", logo: "VSCode" },
+      { name: "Figma", logo: "Figma" },
+      { name: "Tailwind CSS", logo: "TailwindCSS" },
+      { name: "Photoshop", logo: "Photoshop" },
+      { name: "Illustrator", logo: "Illustrator" },
     ],
   },
   {
     id: "productivity",
     title: "Productivity",
     icon: Cloud,
-    color: "from-purple-500 to-pink-500",
     items: [
-      { name: "Microsoft Word", abbr: "MW" },
-      { name: "Microsoft Excel", abbr: "ME" },
-      { name: "Microsoft PowerPoint", abbr: "MP" },
-      { name: "Google Docs", abbr: "GD" },
-      { name: "Google Sheets", abbr: "GS" },
+      { name: "Microsoft Word", logo: "Word" },
+      { name: "Microsoft Excel", logo: "Excel" },
+      { name: "Microsoft PowerPoint", logo: "PowerPoint" },
+      { name: "Google Docs", logo: "GoogleDocs" },
+      { name: "Google Sheets", logo: "GoogleSheets" },
     ],
   },
   {
     id: "data",
     title: "Data Analytics",
     icon: Database,
-    color: "from-green-500 to-emerald-500",
     items: [
-      { name: "ROC Method", abbr: "RC" },
-      { name: "SMART Method", abbr: "SM" },
-      { name: "Data Analysis", abbr: "DA" },
-      { name: "SPSS", abbr: "SP" },
+      { name: "ROC Method", logo: null },
+      { name: "SMART Method", logo: null },
+      { name: "Data Analysis", logo: null },
+      { name: "SPSS", logo: "SPSS" },
     ],
   },
 ];
@@ -68,82 +63,66 @@ const techCategories = [
 export default function SkillsPage() {
   const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("development");
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const activeCategoryData = techCategories.find((c) => c.id === activeCategory);
 
   return (
-    <div className="pt-24 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-24">
+      <div className="max-w-5xl mx-auto px-6 py-16">
         {/* Header */}
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="gradient-text">{t.skills.title}</span>
+        <div className="mb-12">
+          <p className="text-sm font-semibold text-[var(--accent)] uppercase tracking-widest mb-3">Skill</p>
+          <h1 className="text-4xl sm:text-5xl font-bold text-[var(--foreground)] tracking-tight mb-4">
+            {t.skills.title}
           </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-[var(--muted-foreground)] max-w-xl">
             {t.skills.subtitle}
           </p>
-        </motion.div>
+        </div>
 
         {/* Category tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
+        <div className="flex flex-wrap gap-2 mb-10">
           {techCategories.map((category) => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
                 activeCategory === category.id
-                  ? `bg-gradient-to-r ${category.color} text-white`
-                  : "glass text-muted-foreground hover:text-white hover:bg-card"
+                  ? "bg-gradient-to-r from-[var(--accent)] to-yellow-500 text-[var(--accent-foreground)] shadow-lg shadow-[var(--accent)]/25"
+                  : "bg-[var(--card)] text-[var(--muted-foreground)] border border-[var(--border)] hover:border-[var(--accent)]/50 hover:bg-[var(--muted)]"
               }`}
             >
-              <category.icon size={18} />
+              <category.icon size={16} />
               {category.title}
             </button>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Tech logos grid */}
-        <motion.div
-          key={activeCategory}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="p-8 md:p-12 rounded-2xl glass"
-        >
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 md:gap-6">
-            {activeCategoryData?.items.map((tech, index) => (
-              <motion.div
+        {/* Skills grid */}
+        <div className="bg-[var(--card)] rounded-3xl border border-[var(--border)] p-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {activeCategoryData?.items.map((tech) => (
+              <div
                 key={tech.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="group flex flex-col items-center justify-center p-4 rounded-xl bg-card border border-border hover:border-primary/50 hover:bg-card/80 transition-all duration-300 cursor-default aspect-square"
+                className="flex flex-col items-center gap-3 p-5 rounded-2xl bg-[var(--muted)] hover:bg-[var(--card)] border border-transparent hover:border-[var(--border)] hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default group"
               >
-                <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br ${activeCategoryData?.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                  <span className="text-white font-bold text-sm md:text-base">
-                    {tech.abbr}
-                  </span>
+                <div className="w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <SkillLogoComponent logoKey={tech.logo} name={tech.name} />
                 </div>
-                <span className="text-sm font-medium text-muted-foreground group-hover:text-white transition-colors text-center">
+                <span className="text-xs font-semibold text-[var(--muted-foreground)] text-center leading-tight">
                   {tech.name}
                 </span>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
+
+        {/* Info */}
+        <div className="mt-8 flex items-center justify-between text-sm">
+          <p className="text-[var(--muted-foreground)]">
+            <span className="font-semibold text-[var(--foreground)]">{activeCategoryData?.items.length}</span> skills in {activeCategoryData?.title}
+          </p>
+        </div>
       </div>
     </div>
   );

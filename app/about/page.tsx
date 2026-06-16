@@ -1,28 +1,28 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useState } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/i18n";
-import { Download, MapPin, Calendar, Award, GraduationCap, Briefcase } from "lucide-react";
+import { Download, MapPin, Calendar, GraduationCap, Briefcase } from "lucide-react";
+import { AboutLogoComponent } from "@/components/ui/Logos";
 
 export default function AboutPage() {
   const { t } = useLanguage();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [imageError, setImageError] = useState(false);
 
   const timeline = [
     {
       type: "work",
       title: "Computer Administrator",
       company: "Lapas Narkotika Class II A Cirebon",
-      period: "November 2025 - Present",
-      description: "Mengelola server, database, dan sistem informasi. Memastikan integritas data melalui backup reguler dan manajemen akses. Mengembangkan dan meningkatkan aplikasi untuk efisiensi operasional.",
+      period: "November 2025 - Sekarang",
+      description: "Mengelola server, database, dan sistem informasi. Memastikan integritas data melalui backup reguler dan manajemen akses.",
     },
     {
       type: "work",
       title: "IT Support",
-      company: "PT Telekomunikasi Selular - Business Jawa Barat Section",
-      period: "November - December 2024",
+      company: "PT Telekomunikasi Selular - Business Jawa Barat",
+      period: "November - Desember 2024",
       description: "Mengembangkan website personal, memantau sistem komputer dan jaringan, serta mengembangkan website pengaduan pelanggan.",
     },
     {
@@ -30,203 +30,146 @@ export default function AboutPage() {
       title: "S1 Informatika",
       company: "Universitas Muhammadiyah Cirebon",
       period: "2021 - 2025",
-      description: "GPA3.53/4.00. Aktivis organisasi: Kepala Departemen Advokasi Himasantika, Kepala Departemen Advokasi BEM FT, Kepala Kelompok Kerja Mahasiswa.",
+      description: "IPK 3.53/4.00. Aktif dalam organisasi kemahasiswaan.",
     },
   ];
 
   const skills = [
-    { name: "Software Engineering", level: 90 },
-    { name: "Web Development", level: 85 },
-    { name: "Data Analytics", level: 80 },
-    { name: "Server Administration", level: 75 },
-    { name: "Microsoft Office", level: 90 },
-    { name: "Graphic Design", level: 70 },
-  ];
-
-  const certifications = [
-    { name: "Informatika Engineering", issuer: "Universitas Muhammadiyah Cirebon", year: "2025" },
-    { name: "AWS Cloud Practitioner", issuer: "Amazon Web Services", year: "2024" },
-    { name: "Google Data Analytics", issuer: "Google", year: "2024" },
+    { name: "Software Engineering", logo: "SoftwareEngineering" },
+    { name: "Web Development", logo: "WebDevelopment" },
+    { name: "Data Analytics", logo: "DataAnalytics" },
+    { name: "Server Administration", logo: "ServerAdmin" },
+    { name: "Microsoft Office", logo: "MicrosoftOffice" },
+    { name: "Graphic Design", logo: "GraphicDesign" },
   ];
 
   return (
-    <div className="pt-24 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-24">
+      <div className="max-w-5xl mx-auto px-6 py-16">
+        {/* Header */}
+        <div className="mb-16">
+          <p className="text-sm font-semibold text-[var(--accent)] uppercase tracking-widest mb-3">Tentang Saya</p>
+          <h1 className="text-4xl sm:text-5xl font-bold text-[var(--foreground)] tracking-tight">
+            {t.about.title}
+            <span className="gradient-text">{t.about.titleAccent}</span>
+          </h1>
+        </div>
+
         {/* Hero Section */}
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20"
-        >
-          {/* Image */}
-          <div className="relative">
-            <div className="relative w-full aspect-square max-w-md mx-auto rounded-2xl overflow-hidden">
-              {/* Gradient placeholder for photo */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary via-secondary to-accent" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-32 h-32 rounded-full bg-card/50 backdrop-blur flex items-center justify-center">
-                  <span className="text-6xl font-bold gradient-text">M</span>
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start mb-20">
+          {/* Avatar with real photo */}
+          <div className="lg:col-span-2">
+            <div className="relative">
+              <div className="relative aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-[var(--accent)] to-yellow-400 shadow-xl shadow-[var(--accent)]/20">
+                {!imageError ? (
+                  <Image
+                    src="/profile.jpeg"
+                    alt="Foto Profil Musa"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    className="object-cover"
+                    onError={() => setImageError(true)}
+                    priority
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <span className="text-[var(--accent-foreground)]/90 text-8xl font-bold">M</span>
+                  </div>
+                )}
               </div>
+              {/* Decorative element */}
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[var(--muted)] rounded-2xl -z-10" />
             </div>
-            {/* Decorative elements */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-primary/30 blur-[40px]" />
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 rounded-full bg-accent/30 blur-[40px]" />
           </div>
 
           {/* Content */}
-          <div className="space-y-6">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="text-white">{t.about.title}</span>
-                <span className="gradient-text">{t.about.titleAccent}</span>
-              </h1>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                {t.about.bio}
-              </p>
-            </div>
+          <div className="lg:col-span-3 space-y-6">
+            <p className="text-lg text-[var(--muted-foreground)] leading-relaxed">
+              {t.about.bio}
+            </p>
 
-            <div className="flex flex-wrap gap-4">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full glass">
-                <MapPin size={16} className="text-primary" />
-                <span className="text-sm">{t.about.location}</span>
+            {/* Info badges */}
+            <div className="flex flex-wrap gap-3">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--muted)] text-[var(--muted-foreground)]">
+                <MapPin size={16} className="text-[var(--accent)]" />
+                <span className="text-sm font-medium">{t.about.location}</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full glass">
-                <Calendar size={16} className="text-primary" />
-                <span className="text-sm">{t.about.available}</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--muted)] text-[var(--muted-foreground)]">
+                <Calendar size={16} className="text-[var(--accent)]" />
+                <span className="text-sm font-medium">{t.about.available}</span>
               </div>
             </div>
 
-            <p className="text-muted-foreground leading-relaxed">
+            <p className="text-[var(--muted-foreground)] leading-relaxed">
               {t.about.bio2}
             </p>
 
             <a
               href="/cv.pdf"
               download
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary via-secondary to-accent text-white font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[var(--accent)] to-yellow-500 text-[var(--accent-foreground)] font-semibold shadow-lg shadow-[var(--accent)]/25 hover:shadow-xl hover:shadow-[var(--accent)]/30 hover:-translate-y-0.5 transition-all"
             >
               <Download size={18} />
               {t.about.downloadCV}
             </a>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Skills Progress */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-20"
-        >
-          <h2 className="text-2xl md:text-3xl font-bold mb-8">
-            <span className="gradient-text">{t.about.skillsTitle}</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {skills.map((skill, index) => (
-              <div key={skill.name} className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-white font-medium">{skill.name}</span>
-                  <span className="text-sm text-muted-foreground">{skill.level}%</span>
+        {/* Skills */}
+        <div className="mb-20">
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-8">{t.about.skillsTitle}</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+            {skills.map((skill) => (
+              <div
+                key={skill.name}
+                className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] hover:border-[var(--accent)]/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default group"
+              >
+                <div className="w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <AboutLogoComponent logoKey={skill.logo} name={skill.name} />
                 </div>
-                <div className="h-2 rounded-full bg-card overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={isInView ? { width: `${skill.level}%` } : {}}
-                    transition={{ duration: 1, delay: 0.3 + index * 0.1 }}
-                    className="h-full rounded-full bg-gradient-to-r from-primary via-secondary to-accent"
-                  />
+                <span className="text-xs font-semibold text-[var(--muted-foreground)] text-center leading-tight">
+                  {skill.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Timeline */}
+        <div>
+          <h2 className="text-2xl font-bold text-[var(--foreground)] mb-8">{t.about.experienceTitle}</h2>
+          <div className="space-y-6">
+            {timeline.map((item) => (
+              <div
+                key={item.title}
+                className="relative pl-8 pb-6 border-l-2 border-[var(--border)] last:pb-0"
+              >
+                {/* Timeline dot */}
+                <div className={`absolute left-0 top-0 w-4 h-4 rounded-full -translate-x-[9px] ${
+                  item.type === "work" ? "bg-[var(--accent)]" : "bg-[var(--primary)]"
+                }`} />
+
+                {/* Content */}
+                <div className="bg-[var(--card)] rounded-2xl border border-[var(--border)] p-6 hover:border-[var(--accent)]/30 transition-colors">
+                  <div className="flex items-center gap-2 mb-2">
+                    {item.type === "work" ? (
+                      <Briefcase size={14} className="text-[var(--accent)]" />
+                    ) : (
+                      <GraduationCap size={14} className="text-[var(--primary)]" />
+                    )}
+                    <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">
+                      {item.type === "work" ? t.about.work : t.about.education}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-[var(--foreground)] mb-1">{item.title}</h3>
+                  <p className="font-medium text-[var(--accent)] mb-1">{item.company}</p>
+                  <p className="text-sm text-[var(--muted-foreground)] mb-3">{item.period}</p>
+                  <p className="text-sm text-[var(--muted-foreground)] leading-relaxed">{item.description}</p>
                 </div>
               </div>
             ))}
           </div>
-        </motion.div>
-
-        {/* Timeline */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <h2 className="text-2xl md:text-3xl font-bold mb-8">
-            <span className="gradient-text">{t.about.experienceTitle}</span>
-          </h2>
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border md:transform md:-translate-x-px" />
-
-            <div className="space-y-8">
-              {timeline.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                  className={`relative flex flex-col md:flex-row gap-4 md:gap-8 ${
-                    index % 2 === 0 ? "md:flex-row-reverse" : ""
-                  }`}
-                >
-                  {/* Timeline dot */}
-                  <div className="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-gradient-to-r from-primary to-accent transform -translate-x-1/2 md:-translate-x-1/2 mt-1.5" />
-
-                  {/* Content */}
-                  <div className={`md:w-1/2 pl-8 md:pl-0 ${index % 2 === 0 ? "md:pr-8 md:text-right" : "md:pl-8"}`}>
-                    <div className="p-6 rounded-2xl glass hover:bg-card/80 transition-all duration-300">
-                      <div className="flex items-center gap-2 mb-2">
-                        {item.type === "work" ? (
-                          <Briefcase size={16} className="text-primary" />
-                        ) : (
-                          <GraduationCap size={16} className="text-secondary" />
-                        )}
-                        <span className="text-xs text-muted-foreground uppercase tracking-wider">
-                          {item.type === "work" ? t.about.work : t.about.education}
-                        </span>
-                      </div>
-                      <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
-                      <p className="text-primary font-medium mb-1">{item.company}</p>
-                      <p className="text-sm text-muted-foreground mb-2">{item.period}</p>
-                      <p className="text-sm text-muted-foreground">{item.description}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Certifications */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-20"
-        >
-          <h2 className="text-2xl md:text-3xl font-bold mb-8">
-            <span className="gradient-text">{t.about.certTitle}</span>
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={cert.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
-                className="p-6 rounded-2xl glass hover:bg-card/80 transition-all duration-300 flex items-start gap-4"
-              >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
-                  <Award size={24} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-white font-semibold mb-1">{cert.name}</h3>
-                  <p className="text-sm text-muted-foreground">{cert.issuer}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{cert.year}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

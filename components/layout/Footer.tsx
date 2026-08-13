@@ -58,7 +58,7 @@ export function Footer() {
             <h4 className="font-semibold text-[var(--foreground)] mb-4">Connect</h4>
             <div className="flex items-center gap-3">
               <a
-                href="https://github.com"
+                href="https://github.com/Muusss"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-xl bg-[var(--muted)] flex items-center justify-center text-[var(--muted-foreground)] hover:text-[var(--accent)] hover:bg-[var(--accent)]/10 transition-all"
@@ -67,7 +67,7 @@ export function Footer() {
                 <Github size={18} />
               </a>
               <a
-                href="https://linkedin.com/in/musa"
+                href="https://www.linkedin.com/in/musa-03151a391/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-xl bg-[var(--muted)] flex items-center justify-center text-[var(--muted-foreground)] hover:text-[var(--accent)] hover:bg-[var(--accent)]/10 transition-all"

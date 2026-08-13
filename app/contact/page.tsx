@@ -75,7 +75,7 @@ export default function ContactPage() {
           <h3 className="font-semibold text-[var(--foreground)] mb-4">{t.contact.connectTitle}</h3>
           <div className="flex gap-3">
             <a
-              href="https://github.com"
+              href="https://github.com/Muusss"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)] font-semibold hover:border-[var(--accent)]/50 hover:text-[var(--accent)] hover:-translate-y-0.5 transition-all"
@@ -85,7 +85,7 @@ export default function ContactPage() {
               GitHub
             </a>
             <a
-              href="https://linkedin.com/in/musa"
+              href="https://www.linkedin.com/in/musa-03151a391/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)] font-semibold hover:border-[var(--primary)]/50 hover:text-[var(--primary)] hover:-translate-y-0.5 transition-all"

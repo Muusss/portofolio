@@ -127,7 +127,7 @@ export function Navbar() {
               </button>
 
               <a
-                href="https://github.com"
+                href="https://github.com/Muusss"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
@@ -141,7 +141,7 @@ export function Navbar() {
                 <Github size={18} />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/musa-03151a391/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
@@ -218,7 +218,7 @@ export function Navbar() {
                     {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
                   </button>
                   <a
-                    href="https://github.com"
+                    href="https://github.com/Muusss"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-xl bg-[var(--muted)] flex items-center justify-center text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--border)] transition-all"
@@ -227,7 +227,7 @@ export function Navbar() {
                     <Github size={18} />
                   </a>
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/musa-03151a391/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-xl bg-[var(--muted)] flex items-center justify-center text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--border)] transition-all"
